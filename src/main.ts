@@ -2,7 +2,6 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-// import { errorsFormat } from './common/helpers';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -14,11 +13,9 @@ async function bootstrap() {
       validationError: { target: false },
       exceptionFactory: (errors) => {
         console.log(errors);
-        // errorsFormat(errors);
       },
     }),
   );
-  // app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
   app.enableVersioning({ type: VersioningType.URI });
   app.setGlobalPrefix('api');
   const config = new DocumentBuilder()
